@@ -62,13 +62,7 @@
 - (void)setValue:(NSUInteger)value {
     _value = value;
     
-    if (self.isInitial) {
-        self.label.string = [NSString stringWithFormat:@"%lu", (unsigned long)value];
-    } else {
-        if (0 == value) return;
-        
-        self.label.foregroundColor = [UIColor redColor].CGColor;
-    }
+    self.label.string = (value) ? [NSString stringWithFormat:@"%lu", (unsigned long)value] : @"";
 }
 
 - (void)setBorderW:(CGFloat)borderW {

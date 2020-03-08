@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadData:(NSArray<NSArray *> *)data;
 
+- (void)displayGrid:(NSDictionary *)dict;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,6 +16,7 @@
 @interface XXGrid ()
 
 @property (nonatomic, strong) NSMutableArray<XXBlock *> *blocks;
+@property (nonatomic, strong) NSMutableArray<CALayer *> *grids;
 
 @property (nonatomic, strong) XXBlock *block;
 @property (nonatomic, strong) CALayer *row;
@@ -30,6 +31,9 @@
 - (instancetype)init {
     if (self = [super init]) {
         _blocks = [NSMutableArray arrayWithCapacity:kBlockCount];
+        _grids = [NSMutableArray arrayWithCapacity:0];
+        
+        self.borderWidth = 2.f;
         
         [self initLayer];
     }
@@ -56,6 +60,8 @@
 
 - (void)setupLayer {
     [self setupSingleRow];
+    [self setupSingleColumn];
+    [self setupSingleBlock];
 }
 
 - (void)setupNineBlock {
@@ -74,6 +80,7 @@
 }
 
 - (void)setupSingleBlock {
+    [self.grids addObject:self.block];
     [self addSublayer:self.block];
 }
 
@@ -84,9 +91,11 @@
     for (int i = 0; i < kLatticeCount; ++i) {
         XXLattice *lattice = [[XXLattice alloc] init];
         lattice.frame = CGRectMake((i * width), 0, width, height);
+        lattice.borderW = 1.f;
         [self.row addSublayer:lattice];
     }
     
+    [self.grids addObject:self.row];
     [self addSublayer:self.row];
 }
 
@@ -100,6 +109,7 @@
         [self.column addSublayer:lattice];
     }
     
+    [self.grids addObject:self.column];
     [self addSublayer:self.column];
 }
 
@@ -119,6 +129,40 @@
 
 
 #pragma mark - Public Methods
+- (void)displayGrid:(NSDictionary *)dict {
+    GridStyle style = [dict[KEY_GRIDSTYLE] integerValue];
+    NSArray *initiial = dict[KEY_INITIAL];
+    
+    CALayer *tmp;
+    
+    switch (style) {
+        case GridStyleRow : {
+            tmp = self.row;
+        } break;
+        
+        case GridStyleColumn : {
+            tmp = self.column;
+        } break;
+        
+        case GridStyleBlock : {
+            tmp = self.block;
+        } break;
+            
+        default:
+            break;
+    }
+    
+    for (CALayer *grid in self.grids) {
+        grid.hidden = YES;
+    }
+    
+    tmp.hidden = NO;
+    
+    for (int i = 0; i < initiial.count; ++i) {
+        XXLattice *lattice = tmp.sublayers[i];
+        lattice.value = [initiial[i] integerValue];
+    }
+}
 
 
 #pragma mark - Private Methods
@@ -135,6 +179,7 @@
     if (!_block) {
         _block = [[XXBlock alloc] init];
         _block.frame = CGRectMake(0, 0, self.frame.size.width / 3, self.frame.size.height / 3);
+        _block.hidden = YES;
     }
     
     return _block;
@@ -144,6 +189,7 @@
     if (!_row) {
         _row = [[CALayer alloc] init];
         _row.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height / 3 / 3);
+        _row.hidden = YES;
     }
     
     return _row;
@@ -153,6 +199,7 @@
     if (!_column) {
         _column = [[CALayer alloc] init];
         _column.frame = CGRectMake(0, 0, self.frame.size.width / 3 / 3, self.frame.size.height);
+        _column.hidden = YES;
     }
     
     return _column;

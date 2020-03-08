@@ -11,6 +11,7 @@
 
 
 #import <UIKit/UIKit.h>
+#import "XXEnum.h"
 
 
 
@@ -21,6 +22,11 @@
 #define kBlockCount     9
 
 #define kMargin         15.f
+
+#define kSafeAreaTopHeight       (SCREEN_HEIGHT >= 812.0 ? 88 : 64)
+#define kStatusHeight            (SCREEN_HEIGHT >= 812.0 ? 44 : 20)
+#define kSAH                     (SCREEN_HEIGHT >= 812.0 ? 24 : 0)
+#define kSafeAreaBottomHeight    (SCREEN_HEIGHT >= 812.0 ? 34 : 0)
 
 
 ///------ RGB颜色 ------
@@ -43,6 +49,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 
 
+///当前日期字符串
+#define DATE_STRING \
+({NSDateFormatter *fmt = [[NSDateFormatter alloc] init];\
+[fmt setDateFormat:@"YYYY-MM-dd hh:mm:ss"];\
+[fmt stringFromDate:[NSDate date]];})
 
 
 #ifdef DEBUG
