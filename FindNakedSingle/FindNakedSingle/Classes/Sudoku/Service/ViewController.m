@@ -6,7 +6,13 @@
 //  Copyright © 2020 Eleven. All rights reserved.
 //
 
+#define kBtnW   90.f
+#define kBtnH   35.f
+
+
 #import "ViewController.h"
+#import "XXHistoryVC.h"
+#import "XXSettingVC.h"
 
 #import "XXGrid.h"
 
@@ -14,13 +20,18 @@
 
 #import "XXSudokuService.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+
+
 
 @interface ViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel *lb_score;
 @property (nonatomic, strong) UITextField *tf_input;
 @property (nonatomic, strong) XXGrid *grid;
+@property (nonatomic, strong) UIButton *btn_history;
 @property (nonatomic, strong) UIButton *btn_start;
+@property (nonatomic, strong) UIButton *btn_setting;
 
 @property (nonatomic, strong) XXNSScoreModel *score;
 
@@ -58,15 +69,11 @@
 - (void)setupUI {
     [self.view addSubview:self.tf_input];
     [self.view addSubview:self.lb_score];
+    [self.view addSubview:self.btn_history];
     [self.view addSubview:self.btn_start];
+    [self.view addSubview:self.btn_setting];
     
-    [self setupNav];
     [self setupLayer];
-}
-
-
-- (void)setupNav {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(setting:)];
 }
 
 
@@ -89,7 +96,7 @@
 
 
 #pragma mark - Event Response
-- (void)clickedButton:(UIButton *)sender {
+- (void)clickedStartBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
     
     if (sender.selected) {
@@ -103,8 +110,14 @@
     }
 }
 
-- (void)setting:(UIBarButtonItem *)sender {
-    XXLog(@"设置样式");
+- (void)clickedHistoryBtn:(UIButton *)sender {
+    XXHistoryVC *vc = [[XXHistoryVC alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)clickedSettingBtn:(UIButton *)sender {
+    XXSettingVC *vc = [[XXSettingVC alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)input:(NSUInteger)input {
@@ -131,10 +144,10 @@
 #pragma mark - Delegate
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    AudioServicesPlaySystemSound(1519);
+    
     if (self.tf_input == textField) {
         NSUInteger input = [[textField.text stringByReplacingCharactersInRange:range withString:string] integerValue];
-        
-//        XXLog(@"Input -> %lu", input);
         
         [self input:input];
     }
@@ -187,20 +200,44 @@
     return _tf_input;
 }
 
+- (UIButton *)btn_history {
+    if (!_btn_history) {
+        _btn_history = [[UIButton alloc] init];
+        _btn_history.frame = CGRectMake(CGRectGetMinX(self.grid.frame), CGRectGetMaxY(self.grid.frame) + kMargin, kBtnW, kBtnH);
+        _btn_history.backgroundColor = [UIColor blackColor];
+        [_btn_history setTitle:@"HISTORY" forState:UIControlStateNormal];
+        [_btn_history setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btn_history addTarget:self action:@selector(clickedHistoryBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _btn_history;
+}
+
 - (UIButton *)btn_start {
     if (!_btn_start) {
-        CGFloat w = 75.f, h = 35.f;
-        
         _btn_start = [[UIButton alloc] init];
-        _btn_start.frame = CGRectMake((SCREEN_WIDTH - w) / 2, CGRectGetMaxY(self.grid.frame) + kMargin, w, h);
+        _btn_start.frame = CGRectMake((SCREEN_WIDTH - kBtnW) / 2, CGRectGetMinY(self.btn_history.frame), kBtnW, kBtnH);
         _btn_start.backgroundColor = [UIColor blackColor];
         [_btn_start setTitle:@"START" forState:UIControlStateNormal];
         [_btn_start setTitle:@"PAUSE" forState:UIControlStateSelected];
         [_btn_start setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btn_start addTarget:self action:@selector(clickedButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_btn_start addTarget:self action:@selector(clickedStartBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _btn_start;
+}
+
+- (UIButton *)btn_setting {
+    if (!_btn_setting) {
+        _btn_setting = [[UIButton alloc] init];
+        _btn_setting.frame = CGRectMake((CGRectGetMaxX(self.grid.frame) - kBtnW), CGRectGetMaxY(self.grid.frame) + kMargin, kBtnW, kBtnH);
+        _btn_setting.backgroundColor = [UIColor blackColor];
+        [_btn_setting setTitle:@"SETTING" forState:UIControlStateNormal];
+        [_btn_setting setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btn_setting addTarget:self action:@selector(clickedSettingBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _btn_setting;
 }
 
 @end

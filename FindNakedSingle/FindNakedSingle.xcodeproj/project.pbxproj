@@ -19,6 +19,8 @@
 		A5E298562414EC640094E5BA /* XXLattice.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E298532414EC640094E5BA /* XXLattice.m */; };
 		A5E29859241517D10094E5BA /* XXNSScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E29858241517D10094E5BA /* XXNSScoreModel.m */; };
 		A5E2985C241522710094E5BA /* XXSudokuService.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2985B241522710094E5BA /* XXSudokuService.m */; };
+		A5E2986424168B080094E5BA /* XXHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2986324168B080094E5BA /* XXHistoryVC.m */; };
+		A5E2986724168B130094E5BA /* XXSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E2986624168B130094E5BA /* XXSettingVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,10 @@
 		A5E2985A241522710094E5BA /* XXSudokuService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XXSudokuService.h; sourceTree = "<group>"; };
 		A5E2985B241522710094E5BA /* XXSudokuService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XXSudokuService.m; sourceTree = "<group>"; };
 		A5E2985D24153BA00094E5BA /* XXEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XXEnum.h; sourceTree = "<group>"; };
+		A5E2986224168B080094E5BA /* XXHistoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XXHistoryVC.h; sourceTree = "<group>"; };
+		A5E2986324168B080094E5BA /* XXHistoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XXHistoryVC.m; sourceTree = "<group>"; };
+		A5E2986524168B130094E5BA /* XXSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XXSettingVC.h; sourceTree = "<group>"; };
+		A5E2986624168B130094E5BA /* XXSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XXSettingVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,10 @@
 			children = (
 				A5E298332414DFED0094E5BA /* ViewController.h */,
 				A5E298342414DFED0094E5BA /* ViewController.m */,
+				A5E2986224168B080094E5BA /* XXHistoryVC.h */,
+				A5E2986324168B080094E5BA /* XXHistoryVC.m */,
+				A5E2986524168B130094E5BA /* XXSettingVC.h */,
+				A5E2986624168B130094E5BA /* XXSettingVC.m */,
 				A5E2985A241522710094E5BA /* XXSudokuService.h */,
 				A5E2985B241522710094E5BA /* XXSudokuService.m */,
 			);
@@ -243,9 +253,11 @@
 				A5E298542414EC640094E5BA /* XXBlock.m in Sources */,
 				A5E29859241517D10094E5BA /* XXNSScoreModel.m in Sources */,
 				A5E298562414EC640094E5BA /* XXLattice.m in Sources */,
+				A5E2986424168B080094E5BA /* XXHistoryVC.m in Sources */,
 				A5E298552414EC640094E5BA /* XXGrid.m in Sources */,
 				A5E298352414DFED0094E5BA /* ViewController.m in Sources */,
 				A5E2982F2414DFED0094E5BA /* AppDelegate.m in Sources */,
+				A5E2986724168B130094E5BA /* XXSettingVC.m in Sources */,
 				A5E298402414DFEE0094E5BA /* main.m in Sources */,
 				A5E2985C241522710094E5BA /* XXSudokuService.m in Sources */,
 				A5E298322414DFED0094E5BA /* SceneDelegate.m in Sources */,
@@ -389,6 +401,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 388VKLBARN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FindNakedSingle/Classes/Main/PrefixHeader.pch";
 				INFOPLIST_FILE = FindNakedSingle/Classes/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 388VKLBARN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FindNakedSingle/Classes/Main/PrefixHeader.pch";
 				INFOPLIST_FILE = FindNakedSingle/Classes/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
