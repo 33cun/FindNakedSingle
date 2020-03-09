@@ -13,12 +13,12 @@
 #import "ViewController.h"
 #import "XXHistoryVC.h"
 #import "XXSettingVC.h"
+#import "XXSudokuService.h"
 
 #import "XXGrid.h"
+#import "YYFPSLabel.h"
 
 #import "XXNSScoreModel.h"
-
-#import "XXSudokuService.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -72,6 +72,9 @@
     [self.view addSubview:self.btn_history];
     [self.view addSubview:self.btn_start];
     [self.view addSubview:self.btn_setting];
+    
+    YYFPSLabel *lb_fps = [[YYFPSLabel alloc] initWithFrame:CGRectMake(kMargin, kStatusHeight, kSize.width, kSize.height)];
+    [self.view addSubview:lb_fps];
     
     [self setupLayer];
 }
