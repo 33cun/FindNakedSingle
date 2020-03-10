@@ -34,6 +34,7 @@
 @property (nonatomic, strong) UIButton *btn_setting;
 
 @property (nonatomic, strong) XXNSScoreModel *score;
+@property (nonatomic, copy) NSDictionary *curInitialGrid;
 
 @end
 
@@ -106,7 +107,7 @@
         //  开始状态
         [self.tf_input becomeFirstResponder];
         
-        [self displayGrid];
+        [self repeatDrawGrid];
     } else {
         //  停止状态
         [self.tf_input resignFirstResponder];
@@ -125,16 +126,10 @@
 
 - (void)input:(NSUInteger)input {
     //  计算成绩 更新成绩
-    //  更新盘面
+    //  重绘盘面
     
-    self.tf_input.text = @"";
-    
-    [self displayGrid];
-    [self updateScore];
-}
-
-- (void)displayGrid {
-    [self.grid displayGrid:[XXSudokuService getGrid]];
+    [self calculatingResult:input];
+    [self repeatDrawGrid];
 }
 
 
@@ -142,6 +137,31 @@
 
 
 #pragma mark - Private Methods
+/// 计算成绩
+/// @param input Modifiable
+- (void)calculatingResult:(NSUInteger)input {
+    BOOL isRight = ([self.curInitialGrid[KEY_ANSWER] unsignedIntValue] == input);
+    
+    [XXSudokuService calculatingResult:self.score andIsRight:isRight];
+    
+    [self updateScore];
+}
+
+/// 更新初盘数据
+- (void)updateInitialGrid {
+    self.curInitialGrid = [XXSudokuService getGrid];
+}
+
+/// 绘制盘面
+- (void)drawGrid {
+    [self.grid displayGrid:self.curInitialGrid];
+}
+
+/// 重新绘制
+- (void)repeatDrawGrid {
+    [self updateInitialGrid];
+    [self drawGrid];
+}
 
 
 #pragma mark - Delegate
@@ -150,12 +170,12 @@
     AudioServicesPlaySystemSound(1519);
     
     if (self.tf_input == textField) {
-        NSUInteger input = [[textField.text stringByReplacingCharactersInRange:range withString:string] integerValue];
+        NSUInteger input = [string integerValue];
         
         [self input:input];
     }
     
-    return YES;
+    return NO;
 }
 
 

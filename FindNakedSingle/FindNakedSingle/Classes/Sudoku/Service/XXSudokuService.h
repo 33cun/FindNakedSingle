@@ -36,6 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取初盘
 + (NSArray *)getSudokuInitialGrid;
 
+/// 计算成绩
+/// @param isRight  本次是否回答正确
++ (void)calculatingResult:(XXNSScoreModel *)score andIsRight:(BOOL)isRight;
+
 @end
 
 NS_ASSUME_NONNULL_END

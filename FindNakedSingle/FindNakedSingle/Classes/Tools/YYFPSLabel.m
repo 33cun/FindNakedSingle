@@ -3,7 +3,7 @@
 //  YYKitExample
 //
 //  Created by ibireme on 15/9/3.
-//  Copyright (c) 2015 ibireme. All rights reserved.
+//  Copyright (c) 2015 ibireme. All rights reserved.e
 //
 
 #import "YYFPSLabel.h"

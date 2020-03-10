@@ -11,6 +11,7 @@
 
 #define KEY_INITIAL     @"initial"
 #define KEY_GRIDSTYLE   @"gridStyle"
+#define KEY_ANSWER      @"answer"
 
 typedef NS_ENUM(NSUInteger, GridStyle) {
     GridStyleRow,
