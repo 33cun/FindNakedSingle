@@ -218,6 +218,7 @@
         _tf_input.backgroundColor = [UIColor redColor];
         _tf_input.textAlignment = NSTextAlignmentCenter;
         _tf_input.delegate = self;
+        _tf_input.hidden = YES;
     }
     
     return _tf_input;
