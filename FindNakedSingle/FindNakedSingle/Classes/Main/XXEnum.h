@@ -9,9 +9,9 @@
 #ifndef XXEnum_h
 #define XXEnum_h
 
-#define KEY_INITIAL     @"initial"
-#define KEY_GRIDSTYLE   @"gridStyle"
-#define KEY_ANSWER      @"answer"
+static NSString * const KEY_INITIAL = @"initial";
+static NSString * const KEY_GRIDSTYLE = @"gridStyle";
+static NSString * const KEY_ANSWER = @"answer";
 
 typedef NS_ENUM(NSUInteger, GridStyle) {
     GridStyleRow,
